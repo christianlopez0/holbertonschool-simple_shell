@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#define MAX_PATH 1024
+#define MAX_PATH 2048
 
 typedef struct PathNode{
 	char path[MAX_PATH];
