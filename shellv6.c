@@ -141,39 +141,39 @@ void execute_command(char **argv, PathNode *path_list)
 int find_executable(char *command, PathNode *path_list, char *full_path)
 {
 	char child_full_path[MAX_PATH];
-
+	
 	if (strchr(command, '/') != NULL)
-	{
-		if (access(command, X_OK) == 0)
+		{
+			if (access(command, X_OK) == 0)
+				{
+					strncpy(full_path, command, MAX_PATH - 1);
+					full_path[MAX_PATH - 1] = '\0';
+					return 1;
+				}
+			else
+				{
+					full_path[0] = '\0';
+				}
+		}
+	else
+		{
+			while (path_list != NULL)
+				{
+					sprintf(child_full_path, "%s/%s", path_list->path, command);
+					if (access(child_full_path, X_OK) == 0)
+						{
+							strncpy(full_path, child_full_path, MAX_PATH);
+							full_path[MAX_PATH - 1] = '\0';
+							return 1;
+						}
+					path_list = path_list->next;
+				}
+		}
+	if (access(command, X_OK) == 0)
 		{
 			strncpy(full_path, command, MAX_PATH - 1);
 			full_path[MAX_PATH - 1] = '\0';
-			return (1);
+			return 1;
 		}
-		else
-		{
-			full_path[0] = '\0';
-		}
-	}
-	else
-	{
-		while (path_list != NULL)
-		{
-			snprintf(child_full_path, MAX_PATH - 1, "%s/%s", path_list->path, command);
-			if (access(child_full_path, X_OK) == 0)
-			{
-				strncpy(full_path, child_full_path, MAX_PATH - 1);
-				full_path[MAX_PATH - 1] = '\0';
-				return (1);
-			}
-			path_list = path_list->next;
-		}
-	}
-	if (access(command, X_OK) == 0)
-	{
-		strncpy(full_path, command, MAX_PATH - 1);
-		full_path[MAX_PATH - 1] = '\0';
-		return (1);
-	}
-	return (0);
+	return 0;
 }
