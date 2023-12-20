@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-	int i;
+	int i= 0, pathIndex = 0;
 	char **paths;
 	char *path_var, *token;
 	
@@ -17,17 +17,20 @@ int main(int argc, char *argv[])
 	{
 		paths[i] = strdup(path_var);
 		i++;
+		pathIndex++;
 		path_var = strtok(NULL, ":");
 	}
-	
-	for (int i = 0; paths[i] != NULL; i++) {
+	for (int i = 0; paths[i]; i++) {
 		printf("Path %d: %s\n", i + 1, paths[i]);
 	}
 	
-	// Free the allocated memory
-	for (int i = 0; paths[i] != NULL; i++) {
+	for (int i = 0; i < pathIndex; i++) {
+		printf("Path %d: %s\n", i + 1, paths[i]);
+	}
+	for (int i = 0; i < pathIndex; i++) {
 		free(paths[i]);
 	}
+	return 0;
 }
 
 
