@@ -159,7 +159,7 @@ int find_executable(char *command, PathNode *path_list, char *full_path)
 	{
 		while (path_list != NULL)
 		{
-			snprintf(child_full_path, MAX_PATH, "%s/%s", path_list->path, command);
+			snprintf(child_full_path, MAX_PATH - 1, "%s/%s", path_list->path, command);
 			if (access(child_full_path, X_OK) == 0)
 			{
 				strncpy(full_path, child_full_path, MAX_PATH - 1);
