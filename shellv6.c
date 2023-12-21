@@ -3,15 +3,17 @@
 int main(void)
 {
 	int status, token_count;
-	char *input;
+	char *input, *full_path;
 	size_t input_size;
 	char **tokens;
 	pid_t pid;
+	PathNode head = *get_path_list();
 
 	while (1)
 	{
 		input = NULL;
 		input_size = 0;
+		token_count = 0;
 
 		if (isatty(STDIN_FILENO))
 		{
@@ -23,29 +25,34 @@ int main(void)
 			free(input);
 			break;
 		}
-		
-		input[strcspn(input, "\n")] = '\0';
-		if (strlen(input) > 0)
+		full_path = malloc(MAX_PATH);
+		if (full_path == NULL)
 		{
-			pid = fork();
-			if (pid == -1)
-			{
-				perror("fork");
-			}
-			else if (pid == 0)
-			{
-				tokens = tokenize_input(input, &token_count);
-				execute_command(tokens, get_path_list());
-				free(tokens);
-				free(input);
-				exit(EXIT_SUCCESS);
-			}
-			else
-			{
-				waitpid(pid, &status, 0);
-			}
+			fprintf(stderr, "Error: Memory allocation failed\n");
+			exit(EXIT_FAILURE);
 		}
+		input[strcspn(input, "\n")] = '\0';
+		tokens = tokenize_input(input, &token_count);
+		if (find_executable(tokens[0], &head, full_path))
+		{
+			execute_command(tokens, full_path);
+		}
+		else
+		{
+			fprintf(stderr, "./hsh: 1: %s: not found\n", tokens[0]);
+		}
+		for (size_t i = 0; i < token_count; ++i) {
+			free(tokens[i]);
+		}
+		free(tokens);
+		free(full_path);
 		free(input);
+	}
+	while (head.next != NULL)
+	{
+		PathNode *temp = &head;
+		head = *head.next;
+		free(temp);
 	}
 	return (0);
 }
@@ -53,7 +60,7 @@ int main(void)
 char **tokenize_input(char *input, int *token_count)
 {
 	char *token;
-	char **tokens = malloc(MAX_PATH * sizeof(char *));
+	char **tokens = malloc(MAX_PATH *sizeof(char *));
 
 	if (tokens == NULL)
 	{
@@ -112,23 +119,32 @@ PathNode *get_path_list()
 	return (head);
 }
 
-void execute_command(char **command, PathNode *path_list)
+void execute_command(char **command, char *full_path)
 {
-	char full_path[MAX_PATH];
+	int status = 0;
+	pid_t pid;
 
 	if (command[0] == NULL)
 	{
 		return;
 	}
-	if (find_executable(command[0], path_list, full_path))
+	if (strlen(command[0]) > 0)
 	{
-		execve(full_path, command, NULL);
-		perror("execve");
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		fprintf(stderr, "./hsh: 1: %s: not found\n", command[0]);
+		pid = fork();
+		if (pid == -1)
+		{
+			perror("fork");
+		}
+		else if (pid == 0)
+		{
+			execve(full_path, command, NULL);
+			perror("execve");
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			waitpid(pid, &status, 0);
+		}
 	}
 }
 
