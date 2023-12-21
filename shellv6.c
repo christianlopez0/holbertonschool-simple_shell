@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	int status, token_count, whitespaces;
+	int status, token_count, whitespaces, indx;
 	char *input;
 	size_t input_size;
 	char **tokens;
@@ -24,14 +24,14 @@ int main(void)
 			free(input);
 			break;
 		}
-		for (size_t i = 0; i < input_size; ++i)
+		for (indx = 0; indx < input_size; ++indx)
 		{
-			if (input[i] != ' ')
+			if (input[indx] != ' ')
 			{
 				whitespaces++;
 			}
 		}
-		if (input_size == whitespaces)
+		if ((int)input_size == whitespaces)
 			break;
 		input[strcspn(input, "\n")] = '\0';
 		if (strlen(input) > 0)
