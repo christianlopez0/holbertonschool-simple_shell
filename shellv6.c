@@ -20,7 +20,6 @@ int main(void)
 		}
 		if (getline(&input, &input_size, stdin) == -1)
 		{
-			printf("\n");
 			free(input);
 			break;
 		}
