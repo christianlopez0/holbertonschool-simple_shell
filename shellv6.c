@@ -122,7 +122,7 @@ void execute_command(char **command, PathNode *path_list)
 	}
 	if (find_executable(command[0], path_list, full_path))
 	{
-		execve(full_path, command, NULL);
+		execve(full_path, command, environ);
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
