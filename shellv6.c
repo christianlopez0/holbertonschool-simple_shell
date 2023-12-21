@@ -112,23 +112,23 @@ PathNode *get_path_list()
 	return (head);
 }
 
-void execute_command(char **argv, PathNode *path_list)
+void execute_command(char **command, PathNode *path_list)
 {
 	char full_path[MAX_PATH];
 
-	if (argv[0] == NULL)
+	if (command[0] == NULL)
 	{
 		return;
 	}
-	if (find_executable(argv[0], path_list, full_path))
+	if (find_executable(command[0], path_list, full_path))
 	{
-		execve(full_path, argv, NULL);
+		execve(full_path, command, NULL);
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		fprintf(stderr, "Command not found: %s\n", argv[0]);
+		fprintf(stderr, "./hsh: 1: %s: not found\n", command[0]);
 	}
 }
 
