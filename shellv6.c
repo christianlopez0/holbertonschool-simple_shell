@@ -2,11 +2,10 @@
 
 int main(void)
 {
-	int status, token_count;
+	int token_count, i = 0;
 	char *input, *full_path;
 	size_t input_size;
 	char **tokens;
-	pid_t pid;
 	PathNode head = *get_path_list();
 
 	while (1)
@@ -41,7 +40,7 @@ int main(void)
 		{
 			fprintf(stderr, "./hsh: 1: %s: not found\n", tokens[0]);
 		}
-		for (size_t i = 0; i < token_count; ++i) {
+		for (i = 0; i < token_count; ++i) {
 			free(tokens[i]);
 		}
 		free(tokens);
