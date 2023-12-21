@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	int status, token_count;
+	int status, token_count, whitespaces;
 	char *input;
 	size_t input_size;
 	char **tokens;
@@ -12,6 +12,7 @@ int main(void)
 	{
 		input = NULL;
 		input_size = 0;
+		whitespaces = 0;
 
 		if (isatty(STDIN_FILENO))
 		{
@@ -23,7 +24,15 @@ int main(void)
 			free(input);
 			break;
 		}
-		
+		for (size_t i = 0; i < input_size; ++i)
+		{
+			if (input[i] != ' ')
+			{
+				whitespaces++;
+			}
+		}
+		if (input_size == whitespaces)
+			break;
 		input[strcspn(input, "\n")] = '\0';
 		if (strlen(input) > 0)
 		{
