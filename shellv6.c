@@ -86,11 +86,6 @@ PathNode *get_path_list()
 	PathNode *current = NULL;
 	PathNode *node = NULL;
 
-	if (path_var == NULL)
-	{
-		fprintf(stderr, "Error: Unable to retrieve PATH environment variable\n");
-		exit(EXIT_FAILURE);
-	}
 	while (path != NULL)
 	{
 		node = malloc(sizeof(PathNode));
