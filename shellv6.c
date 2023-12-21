@@ -24,7 +24,7 @@ int main(void)
 			free(input);
 			break;
 		}
-		for (indx = 0; indx < input_size; ++indx)
+		for (indx = 0; indx < (int)input_size; ++indx)
 		{
 			if (input[indx] != ' ')
 			{
