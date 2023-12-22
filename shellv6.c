@@ -11,7 +11,6 @@ int main(void)
 	{
 		input = NULL;
 		input = IOHandling(input);
-		input = isAllWhite(input);
 		if (strlen(input) > 0)
 		{
 			pid = fork();
