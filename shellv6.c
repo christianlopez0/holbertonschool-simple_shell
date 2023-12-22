@@ -19,6 +19,8 @@ int main(void)
 			break;
 		}
 		input[strcspn(input, "\n")] = '\0';
+		if (strcmp(input, "exit") == 0)
+			exit(EXIT_SUCCESS);
 		if (strlen(input) > 0)
 		{
 			pid = fork();
@@ -35,9 +37,7 @@ int main(void)
 				exit(EXIT_SUCCESS);
 			}
 			else
-			{
 				waitpid(pid, &status, 0);
-			}
 		}
 		free(input);
 	}
