@@ -21,5 +21,7 @@ char **tokenize_input(char *input, int *token_count);
 PathNode *get_path_list();
 void execute_command(char **tokens, PathNode *path_list);
 int find_executable(char *command, PathNode *path_list, char *full_path);
+char *IOHandling(char *input, size_t input_size);
+int isAllWhite(char *input);
 
 #endif

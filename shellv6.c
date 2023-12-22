@@ -2,38 +2,20 @@
 
 int main(void)
 {
-	int status, token_count, whitespaces, indx;
-	char *input;
+	int status, token_count;
+	char *input = NULL;
 	size_t input_size;
 	char **tokens;
 	pid_t pid;
 
 	while (1)
 	{
-		input = NULL;
-		input_size = 0;
-		whitespaces = 0;
-
-		if (isatty(STDIN_FILENO))
-		{
-			printf("$ ");
-			fflush(stdout);
-		}
-		if (getline(&input, &input_size, stdin) == -1)
+		input = IOHandling(input, input_size);
+		if (isAllWhite(input))
 		{
 			free(input);
-			break;
+			exit(EXIT_FAILURE);
 		}
-		for (indx = 0; indx < (int)input_size; ++indx)
-		{
-			if (input[indx] != ' ')
-			{
-				whitespaces++;
-			}
-		}
-		if ((int)input_size == whitespaces)
-			break;
-		input[strcspn(input, "\n")] = '\0';
 		if (strlen(input) > 0)
 		{
 			pid = fork();
