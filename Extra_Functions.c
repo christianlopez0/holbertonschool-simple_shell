@@ -47,7 +47,6 @@ int implementExitEnv(char *input)
 	{
 		return (1);
 	}
-	
 	if (strcmp(input, "env") == 0)
 	{
 		env = environ;
@@ -55,6 +54,7 @@ int implementExitEnv(char *input)
 		{
 			printf("%s\n", *env);
 			env++;
+			return (2);
 		}
 	}
 	return (0);
