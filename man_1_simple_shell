@@ -1,0 +1,41 @@
+NAME
+       hsh - Simple Shell
+
+SYNOPSIS
+       hsh
+
+DESCRIPTION
+       hsh is a simple shell program that allows the user to execute commands in a command-line interface.
+
+COMMANDS
+       hsh supports the following commands:
+
+       o $ command [args ...] - Execute the specified command with the given arguments.
+
+       o $ exit - Exit the shell.
+
+USAGE
+       To use hsh, run the executable and enter commands at the prompt. For example:
+
+       $ /bin/ls - List files in the current directory.
+
+       $ /bin/echo "Hello, world!" - Print the specified message.
+
+       $ exit - Exit the shell.
+
+RETURN VALUE
+       hsh returns 0 on successful execution and 1 on failure.
+
+EXAMPLES
+       To execute a command, simply type it after the prompt and press Enter.
+
+       $ /bin/ls
+       file1  file2  dir1
+
+       $ /bin/echo "Hello, world!"
+       Hello, world!
+
+AUTHORS
+       Written by
+          Gabriel Velez
+          Christian Lopez
