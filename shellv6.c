@@ -1,6 +1,9 @@
 #include "shell.h"
-
-
+/**
+* main - Is the main.
+* @void: Empty parameter.
+* Return: 0 if success
+**/
 int main(void)
 {
 	int status, token_count;
@@ -45,6 +48,13 @@ int main(void)
 	return (0);
 }
 
+/**
+* tokenize_input - Makes input become **char.
+* @input: input parameter.
+* @token_count: count parameter.
+* Return: Tokens if success.
+**/
+
 char **tokenize_input(char *input, int *token_count)
 {
 	char *token;
@@ -72,6 +82,11 @@ char **tokenize_input(char *input, int *token_count)
 
 	return (tokens);
 }
+
+/**
+* get_path_list - Gets the pathlist.
+* Return: The head if success.
+**/
 
 PathNode *get_path_list()
 {
@@ -107,6 +122,12 @@ PathNode *get_path_list()
 	return (head);
 }
 
+/**
+* execute_command - Excecutes the command.
+* @command: command parameter.
+* @path_list: path_list parameter.
+**/
+
 void execute_command(char **command, PathNode *path_list)
 {
 	char full_path[MAX_PATH];
@@ -118,6 +139,14 @@ void execute_command(char **command, PathNode *path_list)
 	}
 }
 
+
+/**
+* find_executable - Excecutes the command.
+* @command: command parameter.
+* @path_list: path_list parameter.
+* @full_path: full_path parameter.
+* Return: 0 if success
+**/
 int find_executable(char *command, PathNode *path_list, char *full_path)
 {
 	char child_full_path[MAX_PATH];
