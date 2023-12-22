@@ -4,7 +4,6 @@ char *IOHandling(char *input, size_t input_size)
 {
 	input = NULL;
 	input_size = 0;
-	int whitespaces = 0, indx = 0;
 
 	if (isatty(STDIN_FILENO))
 	{
