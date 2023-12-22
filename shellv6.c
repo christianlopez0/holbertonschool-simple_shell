@@ -23,11 +23,6 @@ int main(void)
 			break;
 		}
 		input[strcspn(input, "\n")] = '\0';
-		if (strcmp(input, "exit") == 0)
-		{
-			free(input);
-			exit(EXIT_SUCCESS);
-		}
 		if (strlen(input) > 0)
 		{
 			pid = fork();
