@@ -39,3 +39,23 @@ int isAllWhite(char *input)
 	}
 	return (0);
 }
+int implementExitEnv(char *input)
+{
+	char **env;
+
+	if (strcmp(input, "exit") == 0)
+	{
+		return (1);
+	}
+	
+	if (strcmp(input, "env") == 0)
+	{
+		env = environ;
+		while (*env != NULL)
+		{
+			printf("%s\n", *env);
+			env++;
+		}
+	}
+	return (0);
+}
