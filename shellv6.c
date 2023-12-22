@@ -27,7 +27,7 @@ int main(void)
 		if ((implementExitEnv(input)) == 1)
 		{
 			free(input);
-			exit(2);
+			exit(EXIT_SUCCESS);
 		}
 		if (strlen(input) > 0)
 		{
@@ -42,7 +42,7 @@ int main(void)
 				execute_command(tokens, get_path_list());
 				free(tokens);
 				free(input);
-				exit(EXIT_SUCCESS);
+				exit(EXIT_FAILURE);
 			}
 			else
 			{
