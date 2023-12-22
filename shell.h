@@ -24,6 +24,6 @@ int find_executable(char *command, PathNode *path_list, char *full_path);
 char *IOHandling(char *input);
 char *isAllWhite(char *input);
 int implementExitEnv(char *input);
-
+void prompt();
 
 #endif

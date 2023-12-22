@@ -12,19 +12,13 @@ int main(void)
 	{
 		input = NULL;
 		input_size = 0;
-
-		if (isatty(STDIN_FILENO))
-		{
-			printf("$ ");
-			fflush(stdout);
-		}
+		prompt();
 		if (getline(&input, &input_size, stdin) == -1)
 		{
 			free(input);
 			break;
 		}
 		input[strcspn(input, "\n")] = '\0';
-		input = isAllWhite(input);
 		if (strlen(input) > 0)
 		{
 			pid = fork();
@@ -121,7 +115,6 @@ void execute_command(char **command, PathNode *path_list)
 	{
 		fprintf(stderr, "./hsh: 1: %s: not found\n", command[0]);
 	}
-	
 }
 
 int find_executable(char *command, PathNode *path_list, char *full_path)

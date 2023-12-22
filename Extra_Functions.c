@@ -1,5 +1,14 @@
 #include "shell.h"
 
+void prompt(void)
+{
+	if (isatty(STDIN_FILENO))
+	{
+		printf("$ ");
+		fflush(stdout);
+	}
+}
+
 char *IOHandling(char *input)
 {
 	input = NULL;
@@ -7,7 +16,7 @@ char *IOHandling(char *input)
 	#pragma GCC diagnostic ignored "-Wdeclaration-after-statement"
 	size_t input_size;
 	#pragma GCC diagnostic pop
-	
+
 	if (isatty(STDIN_FILENO))
 	{
 		printf("$ ");
