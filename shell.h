@@ -12,7 +12,8 @@
 
 extern char **environ;
 
-typedef struct PathNode{
+typedef struct PathNode
+{
 	char path[MAX_PATH];
 	struct PathNode *next;
 } PathNode;
@@ -21,6 +22,6 @@ char **tokenize_input(char *input, int *token_count);
 PathNode *get_path_list();
 void execute_command(char **tokens, PathNode *path_list);
 int find_executable(char *command, PathNode *path_list, char *full_path);
-void prompt();
+void prompt(void);
 
 #endif
