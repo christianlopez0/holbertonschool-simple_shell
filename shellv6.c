@@ -24,6 +24,7 @@ int main(void)
 			break;
 		}
 		input[strcspn(input, "\n")] = '\0';
+		input = isAllWhite(input);
 		if (strlen(input) > 0)
 		{
 			pid = fork();
