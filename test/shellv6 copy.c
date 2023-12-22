@@ -3,28 +3,18 @@
 int main(void)
 {
 	int status, token_count;
-	char *input;
-	size_t input_size;
+	char *input = NULL;
 	char **tokens;
 	pid_t pid;
 
 	while (1)
 	{
-		input = NULL;
-		input_size = 0;
-
-		if (isatty(STDIN_FILENO))
-		{
-			printf("$ ");
-			fflush(stdout);
-		}
-		if (getline(&input, &input_size, stdin) == -1)
+		input = IOHandling(input);
+		if (isAllWhite(input))
 		{
 			free(input);
-			break;
+			exit(EXIT_FAILURE);
 		}
-		
-		input[strcspn(input, "\n")] = '\0';
 		if (strlen(input) > 0)
 		{
 			pid = fork();
@@ -116,10 +106,6 @@ void execute_command(char **command, PathNode *path_list)
 {
 	char full_path[MAX_PATH];
 
-	if (command[0] == NULL)
-	{
-		return;
-	}
 	if (find_executable(command[0], path_list, full_path))
 	{
 		execve(full_path, command, NULL);
