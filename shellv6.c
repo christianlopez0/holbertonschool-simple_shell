@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 int main(void)
 {
 	int status, token_count;
@@ -14,8 +15,13 @@ int main(void)
 		input_size = 0;
 		prompt();
 		if (getline(&input, &input_size, stdin) == -1)
+		{
+			free(input);
 			break;
+		}
 		input[strcspn(input, "\n")] = '\0';
+		if (strcmp(input, "exit") == 0)
+			exit(EXIT_SUCCESS);
 		if (strlen(input) > 0)
 		{
 			pid = fork();
