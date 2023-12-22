@@ -27,7 +27,7 @@ int main(void)
 		if ((implementExitEnv(input)) == 1)
 		{
 			free(input);
-			exit(EXIT_SUCCESS);
+			exit(2);
 		}
 		if (strlen(input) > 0)
 		{
