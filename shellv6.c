@@ -14,13 +14,13 @@ int main(void)
 		input_size = 0;
 		prompt();
 		if (getline(&input, &input_size, stdin) == -1)
-		{
-			free(input);
 			break;
-		}
 		input[strcspn(input, "\n")] = '\0';
 		if (strcmp(input, "exit") == 0)
+		{
+			free(input);
 			exit(EXIT_SUCCESS);
+		}
 		if (strlen(input) > 0)
 		{
 			pid = fork();
