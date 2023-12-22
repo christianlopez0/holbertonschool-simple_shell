@@ -4,7 +4,7 @@ char *IOHandling(char *input)
 {
 	input = NULL;
 	#pragma GCC diagnostic push
-	#pragma GCC diagnostic ignored "-declaration-after-statement"
+	#pragma GCC diagnostic ignored "-Wdeclaration-after-statement"
 	size_t input_size;
 	#pragma GCC diagnostic pop
 	
