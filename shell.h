@@ -10,7 +10,6 @@
 
 #define MAX_PATH 2049
 
-extern char **environ;
 
 typedef struct PathNode{
 	char path[MAX_PATH];

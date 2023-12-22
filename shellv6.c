@@ -106,13 +106,9 @@ void execute_command(char **command, PathNode *path_list)
 {
 	char full_path[MAX_PATH];
 
-	if (command[0] == NULL)
-	{
-		return;
-	}
 	if (find_executable(command[0], path_list, full_path))
 	{
-		execve(full_path, command, environ);
+		execve(full_path, command, NULL);
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
