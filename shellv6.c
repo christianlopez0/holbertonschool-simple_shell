@@ -4,26 +4,14 @@ int main(void)
 {
 	int status, token_count;
 	char *input;
-	size_t input_size;
 	char **tokens;
 	pid_t pid;
 
 	while (1)
 	{
 		input = NULL;
-		input_size = 0;
-
-		if (isatty(STDIN_FILENO))
-		{
-			printf("$ ");
-			fflush(stdout);
-		}
-		if (getline(&input, &input_size, stdin) == -1)
-		{
-			free(input);
-			break;
-		}
-		input[strcspn(input, "\n")] = '\0';
+		input = IOHandling(input);
+		input = isAllWhite(input);
 		if (strlen(input) > 0)
 		{
 			pid = fork();

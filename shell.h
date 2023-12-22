@@ -22,7 +22,7 @@ PathNode *get_path_list();
 void execute_command(char **tokens, PathNode *path_list);
 int find_executable(char *command, PathNode *path_list, char *full_path);
 char *IOHandling(char *input);
-int isAllWhite(char *input);
+char *isAllWhite(char *input);
 int implementExitEnv(char *input);
 
 

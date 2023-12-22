@@ -22,7 +22,7 @@ char *IOHandling(char *input)
 	return (input);
 }
 
-int isAllWhite(char *input)
+char *isAllWhite(char *input)
 {
 	size_t whitespaces = 0, indx;
 
@@ -35,9 +35,9 @@ int isAllWhite(char *input)
 	}
 	if (strlen(input) == whitespaces)
 	{
-		return (1);
+		return (NULL);
 	}
-	return (0);
+	return (input);
 }
 int implementExitEnv(char *input)
 {
