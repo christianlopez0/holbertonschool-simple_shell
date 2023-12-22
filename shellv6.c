@@ -24,11 +24,6 @@ int main(void)
 			break;
 		}
 		input[strcspn(input, "\n")] = '\0';
-		if ((implementExitEnv(input)) == 1)
-		{
-			free(input);
-			exit(EXIT_SUCCESS);
-		}
 		if (strlen(input) > 0)
 		{
 			pid = fork();
@@ -42,7 +37,7 @@ int main(void)
 				execute_command(tokens, get_path_list());
 				free(tokens);
 				free(input);
-				exit(EXIT_FAILURE);
+				exit(EXIT_SUCCESS);
 			}
 			else
 			{
@@ -119,15 +114,21 @@ PathNode *get_path_list()
 void execute_command(char **command, PathNode *path_list)
 {
 	char full_path[MAX_PATH];
-
+	
+	if ((implementExitEnv(command[0]) == 1))
+	{
+		exit(EXIT_SUCCESS);
+	}
 	find_executable(command[0], path_list, full_path);
 	if (execve(full_path, command, environ) == -1)
 	{
 		fprintf(stderr, "./hsh: 1: %s: not found\n", command[0]);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		fprintf(stderr, "./hsh: 1: %s: not found\n", command[0]);
+		exit(EXIT_FAILURE);
 	}
 }
 
