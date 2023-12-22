@@ -3,7 +3,7 @@
 char *IOHandling(char *input)
 {
 	input = NULL;
-	size_t input_size = 0;
+	size_t input_size;
 
 	if (isatty(STDIN_FILENO))
 	{
