@@ -115,15 +115,10 @@ void execute_command(char **command, PathNode *path_list)
 {
 	char full_path[MAX_PATH];
 
-	if (command[0] == NULL)
+	find_executable(command[0], path_list, full_path);
+	if (execve(full_path, command, environ) == -1)
 	{
-		return;
-	}
-	if (find_executable(command[0], path_list, full_path))
-	{
-		execve(full_path, command, environ);
-		perror("execve");
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "./hsh: 1: %s: not found\n", command[0]);
 	}
 	else
 	{
