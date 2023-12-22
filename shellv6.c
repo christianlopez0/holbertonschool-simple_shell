@@ -4,13 +4,12 @@ int main(void)
 {
 	int status, token_count;
 	char *input = NULL;
-	size_t input_size;
 	char **tokens;
 	pid_t pid;
 
 	while (1)
 	{
-		input = IOHandling(input, input_size);
+		input = IOHandling(input);
 		if (isAllWhite(input))
 		{
 			free(input);

@@ -1,9 +1,9 @@
 #include "shell.h"
 
-char *IOHandling(char *input, size_t input_size)
+char *IOHandling(char *input)
 {
 	input = NULL;
-	input_size = 0;
+	size_t input_size = 0;
 
 	if (isatty(STDIN_FILENO))
 	{
@@ -21,7 +21,8 @@ char *IOHandling(char *input, size_t input_size)
 
 int isAllWhite(char *input)
 {
-	int whitespaces = 0, indx;
+	size_t whitespaces = 0, indx;
+
 	for (indx = 0; indx < strlen(input); indx++)
 	{
 		if (input[indx] == ' ')
