@@ -3,8 +3,11 @@
 char *IOHandling(char *input)
 {
 	input = NULL;
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-declaration-after-statement"
 	size_t input_size;
-
+	#pragma GCC diagnostic pop
+	
 	if (isatty(STDIN_FILENO))
 	{
 		printf("$ ");
